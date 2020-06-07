@@ -84,7 +84,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp"
 
     //Coin
-    implementation "io.coil-kt:coil:$rootProject.coin"
+    implementation "io.coil-kt:coil:$rootProject.coil"
 
     //Dependency Inject butter-knife
     implementation "com.jakewharton:butterknife:$rootProject.butterknife"
