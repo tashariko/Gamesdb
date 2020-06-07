@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.squareup.picasso.Picasso
+import coil.api.load
 import com.tashariko.gamedb.R
 import com.tashariko.gamedb.database.entity.GameDetail
 
@@ -46,7 +46,7 @@ class GameListAdapter: ListAdapter<GameDetail, GameListAdapter.GameListViewHolde
 
         fun configure(item: GameDetail) {
             item.url.let {
-                Picasso.get().load(it).into(imageView)
+                imageView.load(it)
             }
 
             titleView.text = item.name

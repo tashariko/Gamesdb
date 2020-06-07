@@ -34,6 +34,12 @@ android {
     }
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
@@ -77,20 +83,19 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp"
 
+    //Coin
+    implementation "io.coil-kt:coil:$rootProject.coin"
+
+    //Dependency Inject butter-knife
+    implementation "com.jakewharton:butterknife:$rootProject.butterknife"
+    kapt "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
+
+    //Multidex
+    implementation "androidx.multidex:multidex:$rootProject.multiDex"
+
 
     //Chuck library
     debugImplementation "com.readystatesoftware.chuck:library:$rootProject.chuck"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$rootProject.chuck"
-
-    //Dependency Inject butter-knife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    kapt 'com.jakewharton:butterknife-compiler:10.1.0'
-
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
-    //Multidex
-    implementation 'androidx.multidex:multidex:2.0.1'
-
 
 }
