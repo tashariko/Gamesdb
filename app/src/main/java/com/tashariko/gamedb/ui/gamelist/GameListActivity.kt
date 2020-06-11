@@ -3,6 +3,7 @@ package com.tashariko.gamedb.ui.gamelist
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,12 @@ import com.tashariko.gamedb.database.entity.GameDetail
 import com.tashariko.gamedb.di.util.injectViewModel
 import javax.inject.Inject
 import com.tashariko.gamedb.network.result.Result
+import com.tashariko.gamedb.util.NetworkObserver
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 class GameListActivity : BasActivity(){
@@ -29,6 +36,9 @@ class GameListActivity : BasActivity(){
 
     @BindView(R.id.swipeRefreshView)
     lateinit var swipeRefreshView:SwipeRefreshLayout
+
+    @BindView(R.id.offlineText)
+    lateinit var offlineText: TextView
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -46,12 +56,15 @@ class GameListActivity : BasActivity(){
         swipeRefreshView.setOnRefreshListener {
             viewModel.retry()
         }
-
         viewModel.retry()
-
     }
 
     private fun bindUI() {
+
+        NetworkObserver.getNetLiveData(this@GameListActivity).observe(this@GameListActivity, Observer {
+            offlineText.visibility = if(!it) View.VISIBLE else View.GONE
+        })
+
         viewModel.gameListLiveData.observe(this, Observer { result ->
             swipeRefreshView.isRefreshing = false
             when (result.status) {

@@ -6,4 +6,5 @@
     <color name="gameListTitleColor">#000000</color>
     <color name="gameCardBorderColor">#b4b4b9</color>
     <color name="gameListSubtitleColor">#50505c</color>
+    <color name="offlineColor">#FF0000</color>
 </resources>
