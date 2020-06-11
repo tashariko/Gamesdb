@@ -7,14 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.tashariko.gamedb.application.GamesDbApplication
-import com.tashariko.gamedb.di.component.DaggerAppComponent
 
 import timber.log.Timber
 
 object AppInjector {
 
     fun init(application: GamesDbApplication){
-        DaggerAppComponent.builder().application(application).build().inject(application)
 
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks{
             override fun onActivityPaused(activity: Activity?) {
@@ -47,19 +45,6 @@ object AppInjector {
 
         })
 
-    }
-
-
-    private fun handleFragmentLifecycle(activity: Activity) {
-        if (activity is FragmentActivity) {
-            activity.supportFragmentManager
-                .registerFragmentLifecycleCallbacks(
-                    object : FragmentManager.FragmentLifecycleCallbacks() {
-                        override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-                            Timber.i(f.javaClass.name)
-                        }
-                    }, true)
-        }
     }
 
 }

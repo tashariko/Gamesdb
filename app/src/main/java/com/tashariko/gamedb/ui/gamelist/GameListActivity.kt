@@ -19,6 +19,7 @@ import com.tashariko.gamedb.di.util.injectViewModel
 import javax.inject.Inject
 import com.tashariko.gamedb.network.result.Result
 import com.tashariko.gamedb.util.NetworkObserver
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
@@ -26,6 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
+@AndroidEntryPoint
 class GameListActivity : BasActivity(){
 
     @BindView(R.id.progressBarView)

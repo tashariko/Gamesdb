@@ -9,6 +9,8 @@ import com.tashariko.gamedb.BuildConfig
 import com.tashariko.gamedb.network.RequestInterceptor
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -19,6 +21,7 @@ import javax.inject.Singleton
 
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class AppModule {
 
     @Provides

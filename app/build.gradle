@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -58,6 +59,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+    implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
@@ -69,12 +71,16 @@ dependencies {
     implementation "com.facebook.stetho:stetho:$rootProject.stetho"
     implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho"
 
-    // Dagger
-    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+//    // Dagger
+//    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+//    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+//    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+//    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+//    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
 
     // Networking
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
