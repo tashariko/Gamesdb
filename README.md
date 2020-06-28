@@ -7,7 +7,7 @@ GameDb is a sample android app which show the usage of repository pattern. It im
   * [Kotlin](https://kotlinlang.org/docs/reference/android-overview.html)
   * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
   * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
-  * [Dagger 2](https://dagger.dev/users-guide)
+  * [Hilt](https://dagger.dev/hilt/)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
   * [Livedata](https://developer.android.com/topic/libraries/architecture/livedata)
   * [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)
