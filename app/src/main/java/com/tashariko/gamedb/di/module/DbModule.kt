@@ -17,6 +17,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import timber.log.Timber
 import javax.inject.Singleton
 
 
@@ -39,7 +40,6 @@ class DbModule {
                     super.onCreate(db)
                     val request = OneTimeWorkRequestBuilder<DatabaseInitialiseWorker>().build()
                     WorkManager.getInstance(application.applicationContext).enqueue(request)
-
                 }
             })
             .build()

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,12 +21,8 @@ import javax.inject.Inject
 import com.tashariko.gamedb.network.result.Result
 import com.tashariko.gamedb.util.NetworkObserver
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import timber.log.Timber
+import javax.inject.Singleton
 
 @AndroidEntryPoint
 class GameListActivity : BasActivity(){
@@ -42,17 +39,12 @@ class GameListActivity : BasActivity(){
     @BindView(R.id.offlineText)
     lateinit var offlineText: TextView
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    lateinit var viewModel: GameListViewModel
+    private val viewModel: GameListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gamelist)
         ButterKnife.bind(this)
-
-        viewModel = injectViewModel(viewModelFactory)
         bindUI()
 
         swipeRefreshView.setOnRefreshListener {

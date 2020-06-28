@@ -13,9 +13,8 @@ import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.tashariko.gamedb.network.result.Result
+import dagger.hilt.android.EntryPointAccessors
 
-
-@Singleton
 class GameListRemoteRepository @Inject constructor(private val gamesDao: GamesDao, private val gameListRemoteDataSource: GameListRemoteDataSource) {
 
     fun getData() = object: NetworkBoundRepository<List<GameDetail>, ArrayList<GameDetail>>(){
@@ -27,13 +26,14 @@ class GameListRemoteRepository @Inject constructor(private val gamesDao: GamesDa
             return true
         }
     }.flowData(
-        databaseQuery = { gamesDao.getGamesList() },
-        networkCall = { gameListRemoteDataSource.fetchGameList() },
-        saveCallResult = { gamesDao.insertAll(it) },
+        databaseQuery = { getDatabaseData() },
+        networkCall = { initiateNetworkCall() },
+        saveCallResult = { saveResult(it) },
         parseNetworkResponse = { Result.success(it) }
     )
-    
+
     private fun getDatabaseData(): Flow<List<GameDetail>> {
+
         return gamesDao.getGamesList()
     }
 

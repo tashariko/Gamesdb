@@ -1,4 +1,4 @@
-package com.tashariko.gamedb.di.injectable
+package com.tashariko.gamedb.application
 
 import android.app.Activity
 import android.app.Application
@@ -10,7 +10,7 @@ import com.tashariko.gamedb.application.GamesDbApplication
 
 import timber.log.Timber
 
-object AppInjector {
+object ApplicationLifecycleCallbacks {
 
     fun init(application: GamesDbApplication){
 
@@ -44,7 +44,6 @@ object AppInjector {
             }
 
         })
-
     }
 
 }

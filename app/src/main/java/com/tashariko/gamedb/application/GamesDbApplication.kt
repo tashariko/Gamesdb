@@ -1,26 +1,42 @@
 package com.tashariko.gamedb.application
 
-import android.app.Activity
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.multidex.MultiDexApplication
-import androidx.work.CoroutineWorker
-import com.facebook.stetho.Stetho
-import com.tashariko.gamedb.BuildConfig
-import com.tashariko.gamedb.di.injectable.AppInjector
+import androidx.startup.AppInitializer
+import androidx.work.Configuration
+import com.tashariko.gamedb.services.initializer.StethoInitializer
+import com.tashariko.gamedb.services.initializer.TimberInitializer
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import javax.inject.Inject
 
 
 @HiltAndroidApp
-class GamesDbApplication: MultiDexApplication()  {
+class GamesDbApplication: MultiDexApplication(), Configuration.Provider  {
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
 
-        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        ApplicationLifecycleCallbacks.init(this)
 
-        AppInjector.init(this)
+        /**
+         * Not doing here as done in manifest
+         */
+//        AppInitializer.getInstance(this).initializeComponent(TimberInitializer::class.java)
+//        AppInitializer.getInstance(this).initializeComponent(StethoInitializer::class.java)
+
+        //Will happen after Initializer intialiases itself
+        Timber.i("Application Initialized")
+
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration {
+        return Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
     }
 
 }

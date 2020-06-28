@@ -45,6 +45,11 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+
+    //App startup library
+    //https://proandroiddev.com/making-application-class-much-cleaner-dagger-vs-app-startup-7dd2e3d05066
+    implementation "androidx.startup:startup-runtime:1.0.0-alpha01"
+
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
@@ -79,8 +84,11 @@ dependencies {
 //    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
 
     //Hilt
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hiltViewModelVersion"
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hiltCompilerVersion"
+    implementation 'androidx.hilt:hilt-work:1.0.0-alpha01'
 
     // Networking
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
